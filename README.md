@@ -21,19 +21,19 @@ Supervised means that it will not learn on it's own, it can only learn by data i
 This classifier is based on electronics reviews from amazon.<br>
 
 ## Improvements
-– BIG: Training & testing data should not be single words. Fitted data should be sentences.<br>
-    * This should make the accuracy far more better. (Don't know for sure)<br>
-- Maybe binomial approach (Single word bad, 2 word sequence good?)<br>
-– Dataset improvements, is there a better one?<br>
-– Language processing:<br>
-    * Better regexing or parsing.<br>
-    * Better lemmatization. (with tags?)<br>
+* BIG: Training & testing data should not be single words. Fitted data should be sentences.<br>
+    This should make the accuracy far more better. (Don't know for sure)<br>
+* Maybe binomial approach (Single word bad, 2 word sequence good?)<br>
+* Dataset improvements, is there a better one?<br>
+* Language processing:<br>
+    Better regexing or parsing.<br>
+    Better lemmatization. (with tags?)<br>
 
 ## Setup
 You will need python3
-´´´
+```
 $ pip install python3
-´´´
+```
 
 And NLTK and nltk.wordnet
 ```
@@ -41,9 +41,9 @@ $ pip3 install nltk
 $ python3
 >>> inport nltk
 >>> nltk.download("wordnet")
-´´´
+```
 
 And scikit-learn
-´´´
+```
 $ pip3 install scikit
-´´´
+```
