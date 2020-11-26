@@ -14,9 +14,10 @@ This is a ongoing part-time project so it might take a while to update this.<br>
 In statistics, Naive Bayes classifiers are a family of simple "probabilistic classifiers" based on applying Bayes' theorem with strong (naïve) independence assumptions between the features.<br>
 
 <img src="assets/bayesian_equation.png" width="200" title="Bayes Theorem Equation">
-Where:
-	A is our word.<br>
-	B is the either positive or negative.<br>
+
+Where:<br>
+* A is our word.<br>
+* B is the either positive or negative.<br><br>
 
 
 In short, this program takes a string and tries to determine if it is positive or negative, based on probability. For each word in a sentence, it calculates the probability of the word being positive or negative. And the highest probability wins.<br>
