@@ -6,16 +6,14 @@
 #    By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/25 12:43:17 by seronen           #+#    #+#              #
-#    Updated: 2020/11/26 19:07:33 by seronen          ###   ########.fr        #
+#    Updated: 2020/11/26 20:10:33 by seronen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-from process_data import dataset
-#from process_42_data import dataset
+from dataset_handler import dataset
 
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.feature_extraction.text import CountVectorizer
-from nltk.stem import WordNetLemmatizer
 import sys
 import re
 
@@ -50,9 +48,7 @@ def init_byers():
 
 
 def predict(counter, classifier, training_counts, training_labels, review):
-	lemmatizer = WordNetLemmatizer()
-	review_lem = lemmatizer.lemmatize(review)
-	review_counts = counter.transform([review_lem])
+	review_counts = counter.transform([review])
 
 	if "--proba" in str(sys.argv):
 		prediction = classifier.predict_proba(review_counts)
@@ -72,16 +68,16 @@ def handle_result(prediction, text):
 		print("No prediction!")
 		sys.exit()
 	if prediction == 1:
-		print("The text was classified as positive!")
+		print("\nThe text was classified as positive!")
 	else:
-		print("The text was classified as negative!")
+		print("\nThe text was classified as negative!")
 	save_data(prediction, text)
 
 def main(dataset):
 	handle_args()
 
-	text_data_neg = dataset.data["data_neg"]
-	text_data_pos = dataset.data["data_pos"]
+	text_data_neg = dataset["data_neg"]
+	text_data_pos = dataset["data_pos"]
 
 	train_pos, train_neg, test_pos, test_neg = split_train_test(text_data_pos, text_data_neg)
 	

@@ -33,7 +33,21 @@ This classifier is based on electronics reviews from amazon.<br>
 * Better regexing or parsing<br>
 * Better lemmatization (with tags?)<br>
 
-## Setup
+## How to run
+To build database, run:
+```
+$ python3 build_dataset.py
+```
+Once the database has been built, you don't have to build it again.<br>
+<br>
+Then you can run the classifier:
+```
+$ python3 byers.py "text-to-classify"
+(Option --proba) Displays probabilities of text being neg / pos.
+(Option --benchmark) Displays classifier accuracy in % measured by an independent dataset.
+```
+
+## Requirements
 You will need python3
 ```
 $ pip install python3

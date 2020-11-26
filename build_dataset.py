@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    process_data.py                                    :+:      :+:    :+:    #
+#    build_dataset.py                                   :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/25 13:29:56 by seronen           #+#    #+#              #
-#    Updated: 2020/11/26 19:12:29 by seronen          ###   ########.fr        #
+#    Updated: 2020/11/26 20:13:51 by seronen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ import re
 import sys
 import nltk
 from nltk.stem import WordNetLemmatizer
+import pickle
 
 # For errors, both inherit from Exception
 
@@ -76,5 +77,6 @@ def main():
 	return dataset
 
 dataset = main()
-#print(dataset.data["data_neg"])
+pickle.dump(dataset.data, open( "dataset.p", "wb+" ))
+
 
