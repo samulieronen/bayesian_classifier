@@ -13,6 +13,12 @@ This is a ongoing part-time project so it might take a while to update this.<br>
 ## Bayesian What?
 In statistics, Naive Bayes classifiers are a family of simple "probabilistic classifiers" based on applying Bayes' theorem with strong (naïve) independence assumptions between the features.<br>
 
+<img src="assets/bayesian_equation.png" width="200" title="Bayes Theorem Equation">
+Where:
+	A is our word.<br>
+	B is the either positive or negative.<br>
+
+
 In short, this program takes a string and tries to determine if it is positive or negative, based on probability. For each word in a sentence, it calculates the probability of the word being positive or negative. And the highest probability wins.<br>
 The naive part is the assumption that each word is examined as an independent probability.<br>
 
@@ -22,12 +28,12 @@ This classifier is based on electronics reviews from amazon.<br>
 
 ## Improvements
 * BIG: Training & testing data should not be single words. Fitted data should be sentences.<br>
-    This should make the accuracy far more better. (Don't know for sure)<br>
+	This should make the accuracy far more better. (Don't know for sure)<br>
 * Maybe binomial approach (Single word bad, 2 word sequence good?)<br>
 * Dataset improvements, is there a better one?<br>
 * Language processing:<br>
-    Better regexing or parsing.<br>
-    Better lemmatization. (with tags?)<br>
+	Better regexing or parsing.<br>
+	Better lemmatization. (with tags?)<br>
 
 ## Setup
 You will need python3
@@ -39,7 +45,7 @@ And NLTK and nltk.wordnet
 ```
 $ pip3 install nltk
 $ python3
->>> inport nltk
+>>> import nltk
 >>> nltk.download("wordnet")
 ```
 
