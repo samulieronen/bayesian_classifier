@@ -6,11 +6,12 @@
 #    By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/25 12:43:17 by seronen           #+#    #+#              #
-#    Updated: 2020/11/25 23:31:04 by seronen          ###   ########.fr        #
+#    Updated: 2020/11/26 19:07:33 by seronen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 from process_data import dataset
+#from process_42_data import dataset
 
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.feature_extraction.text import CountVectorizer
@@ -26,8 +27,8 @@ def split_train_test(data_pos=None, data_neg=None):
 		raise ByersError("No data to split!")
 	pos_size = len(data_pos)
 	neg_size = len(data_neg)
-	neg_train_size = int(neg_size * 0.8)
-	pos_train_size = int(pos_size * 0.8)
+	neg_train_size = int(neg_size * 0.7)
+	pos_train_size = int(pos_size * 0.7)
 	train_pos = data_pos[:pos_train_size]
 	train_neg = data_neg[:neg_train_size]
 	test_pos = data_pos[pos_train_size:]
@@ -53,7 +54,7 @@ def predict(counter, classifier, training_counts, training_labels, review):
 	review_lem = lemmatizer.lemmatize(review)
 	review_counts = counter.transform([review_lem])
 
-	if "--proba" in sys.argv:
+	if "--proba" in str(sys.argv):
 		prediction = classifier.predict_proba(review_counts)
 	else:
 		prediction = classifier.predict(review_counts)
@@ -79,8 +80,8 @@ def handle_result(prediction, text):
 def main(dataset):
 	handle_args()
 
-	text_data_neg = dataset.data["books_pos"]
-	text_data_pos = dataset.data["books_neg"]
+	text_data_neg = dataset.data["data_neg"]
+	text_data_pos = dataset.data["data_pos"]
 
 	train_pos, train_neg, test_pos, test_neg = split_train_test(text_data_pos, text_data_neg)
 	

@@ -6,7 +6,7 @@
 #    By: seronen <seronen@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/25 13:29:56 by seronen           #+#    #+#              #
-#    Updated: 2020/11/26 00:03:28 by seronen          ###   ########.fr        #
+#    Updated: 2020/11/26 19:12:29 by seronen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ def listify(string_data):
 	lemmatizer = WordNetLemmatizer()
 	for i in range(len(new_lst)):
 		new_lst[i] = lemmatizer.lemmatize(new_lst[i]) # lemmatize words
+	print(new_lst)
 	return new_lst
 
 # Apply regex to remove noise from data
@@ -49,10 +50,13 @@ def regexify_data(data_dict):
 	if type(data_dict) is not dict:
 		raise RegexifyError("Wrong data type for regexify")
 	for data in data_dict:
-		pre_parse = re.sub(r"<.*>|#.*#:positive|#.*#:negative|:\d|_|\.+|-|&quot"," ", data_dict[data]) # remove all kinds of clutter in data
-		remove_punct = re.sub(r"\!|\||\*|~|\^|=|\"|\?|\$|\'|\(|\)|\[|\]", "", pre_parse) # remove punctuations and other special marks
-		new = re.sub(r"\s{2,12}", " ", remove_punct).lower() # remove unnecessary whitespaces and chance case to lower
-		data_dict[data] = listify(new)
+		new_list = data_dict[data].split("#label#:")
+		for i in range(len(new_list)):
+			pre_parse = re.sub(r"<.*>|#.*#:|#.*#:|:\d|_|\.+|-|&quot"," ", new_list[i]) # remove all kinds of clutter in data
+			remove_punct = re.sub(r"\!|\||\*|~|\^|=|\"|\?|\$|\'|\(|\)|\[|\]", "", pre_parse) # remove punctuations and other special marks
+			new = re.sub(r"\s{2,12}", " ", remove_punct).lower() # remove unnecessary whitespaces and chance case to lower
+			new_list[i] = new
+		data_dict[data] = new_list
 	return data_dict
 
 def main():
@@ -60,10 +64,10 @@ def main():
 		data_dict = {}
 		with open("dataset/negative.review") as books_neg:
 			books_neg_data = books_neg.read()
-			data_dict["books_neg"] = books_neg_data
+			data_dict["data_neg"] = books_neg_data
 		with open("dataset/positive.review") as books_pos:
 			books_pos_data = books_pos.read()
-			data_dict["books_pos"] = books_pos_data
+			data_dict["data_pos"] = books_pos_data
 		list_data = regexify_data(data_dict)    # apply regex
 		dataset = TextData(list_data, "dataset")
 	except KeyboardInterrupt:
@@ -71,6 +75,6 @@ def main():
 		sys.exit()
 	return dataset
 
-
 dataset = main()
+#print(dataset.data["data_neg"])
 
